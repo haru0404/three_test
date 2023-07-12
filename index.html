@@ -30,16 +30,52 @@
       camera.position.set(0, 0, +1000);
 
       // 箱を作成
-      const geometry = new THREE.BoxGeometry(400, 400, 400);
+      const geometry = new THREE.BoxGeometry(50, 200, 50);
       const material = new THREE.MeshNormalMaterial();
       const box = new THREE.Mesh(geometry, material);
       scene.add(box);
 
+      const geometry2 = new THREE.BoxGeometry(150, 30, 150);
+      const box2 = new THREE.Mesh(geometry2, material);
+      const box3 = new THREE.Mesh(geometry2, material);
+      box2.position.set(0,+140, 0);
+      box3.position.set(0,-140, 0);
+      scene.add(box2)
+      scene.add(box3);
+
+      const geometry3 = new THREE.BoxGeometry(300, 30, 300);
+      const box4 = new THREE.Mesh(geometry2, material);
+      const box5 = new THREE.Mesh(geometry2, material);
+      box4.position.set(0,+200, 0);
+      box5.position.set(0,-200, 0);
+      scene.add(box4)
+      scene.add(box5);
+
+      const geometry4 = new THREE.BoxGeometry(50, 50, 50);
+      const box6 = new THREE.Mesh(geometry4, material);
+      const box7 = new THREE.Mesh(geometry4, material);
+      //box6.position.set(+200, 0, 0);
+      scene.add(box6);
+      scene.add(box7);
+
+      let theta = 0;
       tick();
 
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         box.rotation.y -= 0.01;
+        box2.rotation.y += 0.02;
+        box3.rotation.y += 0.02;
+        box6.rotation.y += 0.03;
+        box7.rotation.y -= 0.03;
+
+        theta += 0.03;
+        box6.position.x = Math.cos(theta)*200;
+        box6.position.y = Math.cos(theta)*200;
+        box6.position.z = Math.sin(theta)*200;
+        box7.position.x = -Math.cos(theta)*200;
+        box7.position.y = -Math.cos(theta)*200;
+        box7.position.z = -Math.sin(theta)*200;
         renderer.render(scene, camera); // レンダリング
 
         requestAnimationFrame(tick);
